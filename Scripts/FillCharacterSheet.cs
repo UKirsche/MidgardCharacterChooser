@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class FillCharacterSheet : MidgardCharacterSheetManager {
 
-	public Text name, description;
+	public Text characterName, characterDescription;
 
+	public override void Start ()
+	{
+		
+	}
 }
