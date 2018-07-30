@@ -16,24 +16,24 @@ public class HandleCharacterClick : MonoBehaviour
 	}
 
 	void OnEnable(){
-		InventoryItemBerufDisplay.onClick +=	HandleOnItemClick;
+		CharacterInventoryItemDisplay.onClick +=	HandleOnItemClick;
 	}
 
 	void OnDisable(){
-		InventoryItemBerufDisplay.onClick -= HandleOnItemClick;
+		CharacterInventoryItemDisplay.onClick -= HandleOnItemClick;
 	}
 
 	void OnDestroy ()
 	{
-		InventoryItemBerufDisplay.onClick -= HandleOnItemClick;
+		CharacterInventoryItemDisplay.onClick -= HandleOnItemClick;
 	}
 
 	/// <summary>
 	/// Handles the on item click. Controls whole process of adding and removing items.
 	/// </summary>
 	/// <param name="itemDisplay">Item display.</param>
-	public void HandleOnItemClick (InventoryItemDisplay itemDisplay)
+	public void HandleOnItemClick (CharacterInventoryItemDisplay characterDisplay)
 	{
-		
+		Debug.Log (characterDisplay.item.mCharacter.ToString ());	
 	}
 }
