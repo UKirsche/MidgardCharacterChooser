@@ -16,17 +16,30 @@ public class CharacterInventory : FillInventory<BerufInventoryDisplay> {
 	}
 
 	/// <summary>
-	/// Fills the panel fachkenntnisse. 
+	/// Transformiert Character und füllt das Panel
 	/// </summary>
-	public override void FillPanel()
+	public void FillPanel()
 	{
 		MidgardCharacterSaveLoad.Load ();
 		List<MidgardCharakter> midgardCharaktere = MidgardCharacterSaveLoad.savedCharacters;
-		List<InventoryItem> _listItems;
+		List<CharacterInventoryItem> _listItems;
 		_listItems = CreateListeItems (midgardCharaktere);
 
-		//Prepare listItems 
+		//Prepare listItems und fülle
 		ConfigurePrefab (_listItems);
+	}
+
+	/// <summary>
+	/// Takes list and creates and fills display
+	/// </summary>
+	/// <param name="listItems">List items.</param>
+	protected void ConfigurePrefab(List<CharacterInventoryItem> listItems){
+
+		CharacterInventoryDisplay _inventoryDisplayPrefab=null;
+		_inventoryDisplayPrefab = Instantiate (inventoryDisplayPrefab) as CharacterInventoryDisplay;
+		_inventoryDisplayPrefab.name = panelName;
+		_inventoryDisplayPrefab.transform.SetParent (displayParent, false);
+		_inventoryDisplayPrefab.FillItemDisplay (listItems);
 	}
 
 	/// <summary>
@@ -34,11 +47,11 @@ public class CharacterInventory : FillInventory<BerufInventoryDisplay> {
 	/// </summary>
 	/// <returns>The liste items.</returns>
 	/// <param name="midgardCharaktere">Midgard charaktere.</param>
-	private List<InventoryItem> CreateListeItems (List<MidgardCharakter> midgardCharaktere)
+	private List<CharacterInventoryItem> CreateListeItems (List<MidgardCharakter> midgardCharaktere)
 	{
-		List<InventoryItem> listItems = new List<InventoryItem>();
+		List<CharacterInventoryItem> listItems = new List<CharacterInventoryItem>();
 		foreach (var charakter in midgardCharaktere) {
-			InventoryItem newItem = CreateInventoryItem (charakter.CharacterName);
+			CharacterInventoryItem newItem = CreateInventoryItem (charakter);
 			listItems.Add (newItem);
 		}
 
@@ -51,15 +64,15 @@ public class CharacterInventory : FillInventory<BerufInventoryDisplay> {
 	/// </summary>
 	/// <returns>The inventory item.</returns>
 	/// <param name="name">Name.</param>
-	private InventoryItem CreateInventoryItem(string name){
-
+	private CharacterInventoryItem CreateInventoryItem(MidgardCharakter charakter){
+		string name = charakter.CharacterName;
 		if (name == null || name.Length == 0) {
 			name = UNNAMED;
 		}
 
-		InventoryItem newItem = new InventoryItem ();
+		CharacterInventoryItem newItem = new CharacterInventoryItem ();
 		newItem.name = name;
+		newItem.mCharacter = charakter;
 		return newItem;
-		
 	}
 }
