@@ -7,12 +7,13 @@ using System.Linq;
 
 public class HandleCharacterClick : MonoBehaviour
 {
-
+	private FillCharacterSheet sheetManager;
+	public GameObject characterControler;
 
 	// Use this for initialization
 	void Start ()
 	{
-
+		sheetManager = characterControler.GetComponent<FillCharacterSheet> ();
 	}
 
 	void OnEnable(){
@@ -29,11 +30,13 @@ public class HandleCharacterClick : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Handles the on item click. Controls whole process of adding and removing items.
+	/// Handles the on item click. Lädt den Charakter in die UI
 	/// </summary>
 	/// <param name="itemDisplay">Item display.</param>
 	public void HandleOnItemClick (CharacterInventoryItemDisplay characterDisplay)
 	{
-		Debug.Log (characterDisplay.item.mCharacter.ToString ());	
+		sheetManager.mCharacter = characterDisplay.item.mCharacter;
+		sheetManager.SetCharacterValues ();
+
 	}
 }

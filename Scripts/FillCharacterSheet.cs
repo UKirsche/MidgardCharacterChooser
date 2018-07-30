@@ -10,6 +10,5 @@ public class FillCharacterSheet : MidgardCharacterSheetManager {
 
 	public override void Start ()
 	{
-		
 	}
 }
