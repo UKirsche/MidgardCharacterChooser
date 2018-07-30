@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CharacterInventory : FillInventory<BerufInventoryDisplay> {
+public class CharacterInventory : FillInventoryBase {
 
+	public CharacterInventoryDisplay inventoryDisplayPrefab;
 	const string UNNAMED = "<unbenannt>";
 
-	public override void Start () {
+	public void Start () {
 		panelName= "CharacterPanel";
 	}
 
