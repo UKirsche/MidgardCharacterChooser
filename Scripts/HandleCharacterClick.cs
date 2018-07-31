@@ -58,6 +58,7 @@ public class HandleCharacterClick : MonoBehaviour
 	private void FillBasicCharacterValues (CharacterInventoryItemDisplay characterDisplay)
 	{
 		sheetManager.mCharacter = characterDisplay.item.mCharacter;
+		SetToolboxCharacter ();
 		sheetManager.FillCharacter ();
 	}
 
@@ -68,7 +69,6 @@ public class HandleCharacterClick : MonoBehaviour
 	/// </summary>
 	private void FillFertigkeitenScrollBoxes ()
 	{
-		SetToolboxCharacter ();
 		ClearScrollBoxes ();
 		sheetFertigkeiten.FillPanel ();
 		sheetWaffen.FillPanel ();
