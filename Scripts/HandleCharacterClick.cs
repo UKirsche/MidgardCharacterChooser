@@ -16,6 +16,8 @@ public class HandleCharacterClick : MonoBehaviour
 	public GameObject waffenScroller;
 	public GameObject zauberScroller;
 
+	const string TAGFORSCROLLITEM = "scrollitem";
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -70,7 +72,10 @@ public class HandleCharacterClick : MonoBehaviour
 		globalVars.mCharacter = sheetManager.mCharacter;
 
 
-
+		GameObject[] gameObjects=GameObject.FindGameObjectsWithTag (TAGFORSCROLLITEM);
+		foreach (var gameObject in gameObjects) {
+			Destroy (gameObject);
+		}
 
 		sheetFertigkeiten.FillPanel ();
 		sheetWaffen.FillPanel ();
