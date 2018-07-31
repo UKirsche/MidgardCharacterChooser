@@ -68,17 +68,30 @@ public class HandleCharacterClick : MonoBehaviour
 	/// </summary>
 	private void FillFertigkeitenScrollBoxes ()
 	{
-		Toolbox globalVars = Toolbox.Instance;
-		globalVars.mCharacter = sheetManager.mCharacter;
-
-
-		GameObject[] gameObjects=GameObject.FindGameObjectsWithTag (TAGFORSCROLLITEM);
-		foreach (var gameObject in gameObjects) {
-			Destroy (gameObject);
-		}
-
+		SetToolboxCharacter ();
+		ClearScrollBoxes ();
 		sheetFertigkeiten.FillPanel ();
 		sheetWaffen.FillPanel ();
 		sheetZauber.FillPanel ();
+	}
+
+	/// <summary>
+	/// Speichert den Character in der Singleton-Toolbox
+	/// </summary>
+	private void SetToolboxCharacter ()
+	{
+		Toolbox globalVars = Toolbox.Instance;
+		globalVars.mCharacter = sheetManager.mCharacter;
+	}
+
+	/// <summary>
+	/// Clears the scroll boxes.
+	/// </summary>
+	private void ClearScrollBoxes ()
+	{
+		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag (TAGFORSCROLLITEM);
+		foreach (var gameObject in gameObjects) {
+			Destroy (gameObject);
+		}
 	}
 }
