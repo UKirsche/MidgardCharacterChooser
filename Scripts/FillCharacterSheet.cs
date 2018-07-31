@@ -16,8 +16,8 @@ public class FillCharacterSheet : MidgardCharacterSheetManager {
 
 	private void SetBeschreibung ()
 	{
-		characterName.text = mCharacter.Archetyp.ToString ();
-		characterDescription.text = mCharacter.Schicht.ToString ();
+		characterName.text = mCharacter.CharacterName.ToString ();
+		characterDescription.text = mCharacter.CharacterBeschreibung.ToString ();
 	}
 
 }
