@@ -56,7 +56,7 @@ public class HandleCharacterClick : MonoBehaviour
 	private void FillBasicCharacterValues (CharacterInventoryItemDisplay characterDisplay)
 	{
 		sheetManager.mCharacter = characterDisplay.item.mCharacter;
-		sheetManager.SetCharacterValues ();
+		sheetManager.FillCharacter ();
 	}
 
 
@@ -68,6 +68,7 @@ public class HandleCharacterClick : MonoBehaviour
 	{
 		Toolbox globalVars = Toolbox.Instance;
 		globalVars.mCharacter = sheetManager.mCharacter;
+
 
 
 
