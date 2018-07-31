@@ -22,7 +22,7 @@ public class CharacterInventory : FillInventoryBase {
 	public void FillPanel()
 	{
 		MidgardCharacterSaveLoad.Load ();
-		List<MidgardCharakter> midgardCharaktere = MidgardCharacterSaveLoad.savedCharacters;
+		List<MidgardCharakter> midgardCharaktere = MidgardCharacterSaveLoad.midgardSavings.savedCharacters;
 		List<CharacterInventoryItem> _listItems;
 		_listItems = CreateListeItems (midgardCharaktere);
 
