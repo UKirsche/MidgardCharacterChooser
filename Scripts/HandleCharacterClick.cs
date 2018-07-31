@@ -11,7 +11,7 @@ public class HandleCharacterClick : MonoBehaviour
 	private SheetFillFertigkeitenInventory sheetFertigkeiten;
 	private SheetFillWaffenInventory sheetWaffen;
 	private SheetFillZauberInventory sheetZauber;
-	public GameObject characterControler;
+	public GameObject characterController;
 	public GameObject fertigkeitenScroller;
 	public GameObject waffenScroller;
 	public GameObject zauberScroller;
@@ -19,7 +19,7 @@ public class HandleCharacterClick : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		sheetManager = characterControler.GetComponent<FillCharacterSheet> ();
+		sheetManager = characterController.GetComponent<FillCharacterSheet> ();
 		sheetFertigkeiten = fertigkeitenScroller.GetComponent<SheetFillFertigkeitenInventory> ();
 		sheetWaffen = waffenScroller.GetComponent<SheetFillWaffenInventory> ();
 		sheetZauber = zauberScroller.GetComponent<SheetFillZauberInventory> ();
@@ -44,15 +44,35 @@ public class HandleCharacterClick : MonoBehaviour
 	/// <param name="itemDisplay">Item display.</param>
 	public void HandleOnItemClick (CharacterInventoryItemDisplay characterDisplay)
 	{
-		sheetManager.mCharacter = characterDisplay.item.mCharacter;
-		Toolbox globalVars = Toolbox.Instance;
-		globalVars.mCharacter = sheetManager.mCharacter;
-		sheetManager.SetCharacterValues ();
-		sheetFertigkeiten.FillPanel ();
-		sheetWaffen.FillPanel ();
-		sheetZauber.FillPanel ();
+		FillBasicCharacterValues (characterDisplay);
+		FillFertigkeitenScrollBoxes ();
 
 	}
 
+	/// <summary>
+	/// Füllt die linke Seite des Charakterblattes aus (Deskriptiv, Basiseigenschaften, Aggeleitete...)
+	/// </summary>
+	/// <param name="characterDisplay">Character display.</param>
+	private void FillBasicCharacterValues (CharacterInventoryItemDisplay characterDisplay)
+	{
+		sheetManager.mCharacter = characterDisplay.item.mCharacter;
+		sheetManager.SetCharacterValues ();
+	}
 
+
+	/// <summary>
+	/// Füllt die Fertigkeitenscrollboxen auf: Normale-, Waffen-, Zauberfertigkeiten.
+	/// Für die entsprechenden Methoden wird noch eine Toolbox-Variable gesetzt (Singleton)
+	/// </summary>
+	private void FillFertigkeitenScrollBoxes ()
+	{
+		Toolbox globalVars = Toolbox.Instance;
+		globalVars.mCharacter = sheetManager.mCharacter;
+
+
+
+		sheetFertigkeiten.FillPanel ();
+		sheetWaffen.FillPanel ();
+		sheetZauber.FillPanel ();
+	}
 }
