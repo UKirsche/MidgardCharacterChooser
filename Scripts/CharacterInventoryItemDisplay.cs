@@ -26,9 +26,11 @@ public class CharacterInventoryItemDisplay : MonoBehaviour {
 
 	public void Click()
 	{
+		CharacterButtonColorChanger buttonColorChanger = GetComponentInChildren<CharacterButtonColorChanger> ();
 		if (onClick != null && item!=null) {
+			buttonColorChanger.ButtonClick ();
 			onClick.Invoke (this);
 		} 	
-		Debug.Log("I Character " + nameItem.text + " was clicked");
 	}
+
 }

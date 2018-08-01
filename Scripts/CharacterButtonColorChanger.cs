@@ -22,5 +22,9 @@ public class CharacterButtonColorChanger : MonoBehaviour, IPointerEnterHandler, 
 		theText.color = Color.white; //Or however you do your color
 	}
 
+	public void ButtonClick(){
+		Image bgImage = transform.parent.gameObject.GetComponent<Image> ();
+		bgImage.color = Color.grey;
+	}
 
 }
