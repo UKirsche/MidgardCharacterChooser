@@ -13,11 +13,17 @@ public class HandleScrollBoxes : MonoBehaviour {
 	public GameObject waffenScroller;
 	public GameObject zauberScroller;
 
-	// Use this for initialization
-	void Start () {
+
+	void Awake(){
 		sheetFertigkeiten = fertigkeitenScroller.GetComponent<SheetFillFertigkeitenInventory> ();
 		sheetWaffen = waffenScroller.GetComponent<SheetFillWaffenInventory> ();
 		sheetZauber = zauberScroller.GetComponent<SheetFillZauberInventory> ();
+	}
+
+
+	// Use this for initialization
+	void Start () {
+		
 	}
 
 	/// <summary>
