@@ -12,6 +12,8 @@ public class SetCharacterChosen : MonoBehaviour {
 		Toolbox globalVars = Toolbox.Instance;
 		mCharacterChosen = globalVars.mCharacter;
 		SetChosenCharaterNameSheet ();
+		HandleScrollBoxes boxFiller = GetComponent<HandleScrollBoxes> ();
+		boxFiller.FillFertigkeiten ();
 	}
 
 

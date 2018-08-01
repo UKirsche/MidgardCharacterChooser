@@ -7,24 +7,17 @@ using System.Linq;
 
 public class HandleCharacterClick : MonoBehaviour
 {
+	const string GONAMESCROLLFILLER = "SwitchSerializeCharacter";
 	private FillCharacterSheet sheetManager;
-	private SheetFillFertigkeitenInventory sheetFertigkeiten;
-	private SheetFillWaffenInventory sheetWaffen;
-	private SheetFillZauberInventory sheetZauber;
+	private HandleScrollBoxes scrollBoxFiller;
 	public GameObject characterController;
-	public GameObject fertigkeitenScroller;
-	public GameObject waffenScroller;
-	public GameObject zauberScroller;
-
-	const string TAGFORSCROLLITEM = "scrollitem";
 
 	// Use this for initialization
 	void Start ()
 	{
 		sheetManager = characterController.GetComponent<FillCharacterSheet> ();
-		sheetFertigkeiten = fertigkeitenScroller.GetComponent<SheetFillFertigkeitenInventory> ();
-		sheetWaffen = waffenScroller.GetComponent<SheetFillWaffenInventory> ();
-		sheetZauber = zauberScroller.GetComponent<SheetFillZauberInventory> ();
+		GameObject switchSerializer = GameObject.Find (GONAMESCROLLFILLER);
+		scrollBoxFiller = switchSerializer.gameObject.GetComponent<HandleScrollBoxes> ();
 	}
 
 	void OnEnable(){
@@ -48,7 +41,6 @@ public class HandleCharacterClick : MonoBehaviour
 	{
 		FillBasicCharacterValues (characterDisplay);
 		FillFertigkeitenScrollBoxes ();
-
 	}
 
 	/// <summary>
@@ -69,10 +61,7 @@ public class HandleCharacterClick : MonoBehaviour
 	/// </summary>
 	private void FillFertigkeitenScrollBoxes ()
 	{
-		ClearScrollBoxes ();
-		sheetFertigkeiten.FillPanel ();
-		sheetWaffen.FillPanel ();
-		sheetZauber.FillPanel ();
+		scrollBoxFiller.FillFertigkeiten ();
 	}
 
 	/// <summary>
@@ -82,16 +71,5 @@ public class HandleCharacterClick : MonoBehaviour
 	{
 		Toolbox globalVars = Toolbox.Instance;
 		globalVars.mCharacter = sheetManager.mCharacter;
-	}
-
-	/// <summary>
-	/// Clears the scroll boxes.
-	/// </summary>
-	private void ClearScrollBoxes ()
-	{
-		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag (TAGFORSCROLLITEM);
-		foreach (var gameObject in gameObjects) {
-			Destroy (gameObject);
-		}
 	}
 }
